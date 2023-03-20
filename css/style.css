@@ -1255,7 +1255,7 @@ h1 {
 	}
 
 	.modal-window {
-		transform: translate(-50%, -50%);
+		transform: translate(-50%, -80%);
 		display: grid;
 		grid-template-columns: 1fr;
 	}
@@ -1309,7 +1309,7 @@ h1 {
 	}
 
 	.modal-screen {
-		transform: translate(-50%, -50%);
+		transform: translate(-50%, -80%);
 		display: grid;
 		grid-template-columns: 1fr;
 		height: 350px;

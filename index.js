@@ -99,7 +99,7 @@ function PegarValue(event) {
         left.style.display = "blockw";
         searchSide.classList.add("active");
         searchSide.style.width = "80%%";
-        searchSide.style.height = "300px";
+        searchSide.style.height = "100%";
         containerErro.style.height = 0;
         catchSpan.style.width = 0;
         catchSpan.textContent = "";
