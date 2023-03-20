@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokedex</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="shortcut icon" href="imgs/favicon-16x16.png" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1 class="h2-container">Pokedex</h1>
+        <ul class="mysocial-medias">
+          <li class="instagram">
+            <a href="https://www.instagram.com/achten.rafael" target="_blank">
+              <img src="/imgs/iconmonstr-instagram-11.svg">
+            </a>
+          </li>
+          <li class="github">
+            <a href="https://github.com/Faelkk" target="_blank">
+              <img src="/imgs/iconmonstr-github-1.svg">
+            </a>
+          </li>
+        </ul>
+      </div>
+     
+      <form class="container-input" action="">
+        <input
+          type="search  "
+          placeholder="Procure seu pokemon"
+          class="input-poke"
+          required
+          name="input"
+        />
+        <button class="btn-input" type="submit">Buscar</button>
+      </form>
+
+      <div class="container-search">
+        <div class="search-side">
+          <div class="left">
+            <div class="container-total">
+              <h2 class="numberPoke"></h2>
+              <h2 class="namePoke"></h2>
+            </div>
+
+            <div class="types-search"></div>
+            <div class="btn-cont"></div>
+          </div>
+          <div class="right">
+            <img src="" class="img-search" />
+          </div>
+        </div>
+      </div>
+      <div class="catch-erro-container">
+        <div class="catch-erro">
+          <div class="catch-quadrado">
+            <h2 class="catch-span">Pokemon nao encontrado</h2>
+            <img class="img-catch " src="/imgs/54.png">
+          </div>
+         </div>
+      </div>
+    
+      <div class="container-types"></div>
+
+      <ul data-js="Pokedex" class="pokedex"></ul>
+      <div class="modal-overlay">
+        <div class="modal-window">
+          <button class="modal-close-button">&times;</button>
+          <div class="pokemon-info">
+            <div class="imagem-pokemon">
+              <img class="imagem-poke" />
+            </div>
+
+            <div class="pokemon-sobre">
+              <div class="container-svg">
+                <div class="weight-pokemon">
+                  <img src="imgs/icon-weight.svg" />
+                  <span class="peso"></span>
+                </div>
+
+                <div class="height-pokemon">
+                  <img src="imgs/icon-ruler.svg" />
+                  <span class="altura"></span>
+                </div>
+                <div class="types-container"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pokemon-status">
+            <div class="container-poke">
+              <div class="status-container">
+                <div class="hp"><span class="mensagem-poke1">Hp:</span></div>
+                <div class="attack">
+                  <span class="mensagem-poke2">Attack:</span>
+                </div>
+                <div class="defense">
+                  <span class="mensagem-poke3">Defense:</span>
+                </div>
+                <div class="spc-atk">
+                  <span class="mensagem-poke4">sp.Atk</span>
+                </div>
+                <div class="sp-def">
+                  <span class="mensagem-poke5">sp.Def:</span>
+                </div>
+                <div class="speed">
+                  <span class="mensagem-poke6">speed:</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+
+      <div class="modal-informationLoading">
+        <div class="modal-screen">
+          <button class="btn-screen">&times;</button>
+          <div class="left-windowPokemon">
+            <div class="constImg-windowPokemon">
+              <img class="img-windowPokemon" src="" />
+            </div>
+            <div class="window-informationPokemon">
+              <div class="window-about">
+                <div class="container-svg">
+                  <div class="weight-pokemonScreen">
+                    <img src="imgs/icon-weight.svg" />
+                    <span class="pesoScreen"></span>
+                  </div>
+                  <div class="height-pokemonScreen">
+                    <img src="imgs/icon-ruler.svg" />
+                    <span class="alturaScreen"></span>
+                  </div>
+                  </div>
+
+                
+                </div>
+                <div class="window-types"></div>
+              </div>
+            </div>
+            <div class="right-windowPokemon">
+              <div class="pokemon-statusLoading">
+                <div class="container-loadingStatus">
+                  <div class="loading-container">
+                    <div class="loading-hp">
+                      <span class="mensagem-loading1">Hp:</span></div>
+                    <div class="loading-attack">
+                      <span class="mensagem-loading2">Attack:</span>
+                    </div>
+                    <div class="loading-defense">
+                      <span class="mensagem-loading3">Defense:</span>
+                    </div>
+                    <div class="loading-spc-atk">
+                      <span class="mensagem-loading4">sp.Atk</span>
+                    </div>
+                    <div class="loading-sp-def">
+                      <span class="mensagem-loading5">sp.Def:</span>
+                    </div>
+                    <div class="loading-speed">
+                      <span class="mensagem-loading6">speed:</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-lodiang"> 
+    <div class="container-back">
+    </div>
+    <button class="btn-top">
+      <img src="/imgs/up-arrow-svgrepo-com.svg" id="svg1" />
+    </button>
+  </div>
+     
+    <footer class="footer">
+      <p class="p=footer">made by faelkkk </p>
+      <ul class="ul-socialMedias">
+        <li class="li-footer"><a href="https://www.instagram.com/achten.rafael" target="_blank"><img src="/imgs/iconmonstr-instagram-11.svg"></a></li>
+        <li class="li-footer"><a href="https://github.com/Faelkk" target="_blank"><img src="imgs/iconmonstr-github-1.svg"></a></li>
+      
+      </ul>
+    </footer>
+  
+    <script src="/index.js" type="module"></script>
+    <script src="/contantes.js" type="module"></script>
+  </body>
+</html>
