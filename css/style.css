@@ -168,7 +168,7 @@ h1 {
 }
 
 .rock {
-	background-color: #b8b816;
+	background-color: #db9966;
 }
 
 .fairy {
@@ -575,7 +575,6 @@ h1 {
 	position: absolute;
 	top: 8px;
 	right: 8px;
-	background-color: #969696;
 	color: #fff;
 	border: none;
 	font-size: 16px;
@@ -964,7 +963,6 @@ h1 {
 	position: absolute;
 	top: 5px;
 	right: 8px;
-	background-color: #969696;
 	color: #fff;
 	border: none;
 	font-size: 16px;
@@ -1320,7 +1318,7 @@ h1 {
 }
 
 .modal-screen,
-.modal-window {
+.imagem .modal-window {
 	position: fixed;
 	top: 50%;
 	left: 50%;
