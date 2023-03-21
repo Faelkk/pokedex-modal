@@ -62,6 +62,7 @@ async function SearchName() {
 async function fetchPokemon() {
   const offset = (currentPage - 1) * perPage;
   const url = `https://pokeapi.co/api/v2/pokemon?limit=${perPage}&offset=${offset}`;
+
   const response = await fetch(url).then((response) => response.json());
 
   const promisses = response.results.map(
@@ -89,7 +90,10 @@ function PegarValue(event) {
 
     async function fetchAfterSearch() {
       try {
-        const url = `https:pokeapi.co/api/v2/pokemon/${PokeThatIWillSearch}`;
+        const url = `https://pokeapi.co/api/v2/pokemon/${PokeThatIWillSearch}`;
+        const urlObj = new URL(url);
+        const caminho = urlObj.pathname;
+        console.log(caminho);
         const response = await fetch(url).then((response) => response.json());
 
         const containerTotal1 = document.querySelector(".container-total");
