@@ -101,8 +101,8 @@ function PegarValue(event) {
         const btnCont = document.querySelector(".btn-cont");
         left.style.display = "blockw";
         searchSide.classList.add("active");
-        searchSide.style.width = "80%%";
-        searchSide.style.height = "100%";
+        searchSide.style.width = "80%";
+        searchSide.style.height = "";
         containerErro.style.height = 0;
         catchSpan.style.width = 0;
         catchSpan.textContent = "";
@@ -209,7 +209,7 @@ function PegarValue(event) {
         imgCatch.style.height = "100%";
         catchSpan.style.height = "9%";
         containerErro.style.opacity = 1;
-        catchSpan.textContent = "Pokemon nao encontrado";
+        catchSpan.textContent = "Pokemon não encontrado";
 
         quadradoErro.classList.add("active");
 
