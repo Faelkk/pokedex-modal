@@ -90,7 +90,6 @@ function PegarValue(event) {
     async function fetchAfterSearch() {
       try {
         const url = `https:pokeapi.co/api/v2/pokemon/${PokeThatIWillSearch}`;
-
         const response = await fetch(url).then((response) => response.json());
 
         const containerTotal1 = document.querySelector(".container-total");
