@@ -1,10 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,300&display=swap");
-
 body {
 	color: white;
 	margin: 0;
 	background: #1b1a28;
-	margin: 0;
 	padding: 0;
 	height: 100vh;
 }
@@ -13,7 +10,6 @@ img {
 	max-width: 100%;
 }
 
-li,
 ul {
 	list-style: none;
 }
@@ -21,9 +17,8 @@ ul {
 .footer {
 	display: flex;
 	justify-content: space-between;
-	margin: 5%;
-	font-family: "Lato", sans-serif;
-	font-weight: bold;
+	margin: 5% 0;
+	font: 700 1.2rem/1.5 "Lato", sans-serif;
 	text-transform: capitalize;
 	border-top: 1px solid #fff;
 }
@@ -49,7 +44,7 @@ ul {
 .pokemon-sobre,
 .window-informationPokemon {
 	margin-left: 15%;
-	font-family: "Lato", sans-serif;
+	font: 400 1rem/1.5 "Lato", sans-serif;
 }
 
 .pokemon-info {
@@ -73,12 +68,7 @@ ul {
 }
 
 .height-pokemon,
-.height-pokemonScreen {
-	display: flex;
-	gap: 10px;
-	font-weight: bold;
-}
-
+.height-pokemonScreen,
 .weight-pokemon,
 .weight-pokemonScreen {
 	display: flex;
@@ -87,17 +77,14 @@ ul {
 	font-weight: bold;
 }
 
-.ruler {
+.ruler,
+.weight {
 	width: 10%;
 	position: absolute;
 	left: 50%;
-	top: -20vh;
 }
 
-.tamanho-span {
-	position: relative;
-}
-
+.tamanho-span,
 .medida-span {
 	position: relative;
 }
@@ -106,6 +93,10 @@ ul {
 	display: flex;
 	flex-direction: column;
 }
+
+
+
+
 
 .types-container,
 .window-types {
@@ -127,8 +118,6 @@ h1 {
 	color: #4b12bd;
 }
 
-
-
 .card::after {
 	content: "";
 	display: block;
@@ -142,8 +131,9 @@ h1 {
 	left: 25%;
 }
 
-.steel {
-	background-color: #f4f4f4;
+.steel,
+.normal {
+	background-color: #808080;
 }
 
 .fire {
@@ -199,20 +189,12 @@ h1 {
 	background-color: #ff5683;
 }
 
-.normal {
-	background-color: rgb(231, 167, 231);
-}
-
 .ghost {
 	background-color: #7600a9;
 }
 
 .dark {
 	background-color: #5a566a;
-}
-
-.steel {
-	background-color: #808080;
 }
 
 .card-title {
@@ -245,202 +227,71 @@ h1 {
 	z-index: 2;
 }
 
-.card-subtitle .grass {
-	background: 5px center no-repeat rgb(28, 216, 14);
+.card-subtitle .grass,
+.card-subtitle .poison,
+.card-subtitle .fire,
+.card-subtitle .bug,
+.card-subtitle .dark,
+.card-subtitle .dragon,
+.card-subtitle .electric,
+.card-subtitle .fairy,
+.card-subtitle .fighting,
+.card-subtitle .normal,
+.card-subtitle .flying,
+.card-subtitle .steel,
+.card-subtitle .ground,
+.card-subtitle .ghost,
+.card-subtitle .ice,
+.card-subtitle .psychic {
+	background-repeat: no-repeat;
 	color: #fff;
 	padding: 10px;
 	border-radius: 10%;
 	text-transform: capitalize;
+}
+
+.card-subtitle .grass {
+	background-color: #5edc0e;
 }
 
 .card-subtitle .poison {
-	background: 5px center no-repeat #f149ff;
-	color: #fff;
-	padding: 10px;
-	border-radius: 10%;
-	text-transform: capitalize;
+	background-color: #f149ff;
 }
 
 .card-subtitle .fire {
-	background: 5px center no-repeat #ff9900;
-	color: #fff;
-	padding: 10px;
-	border-radius: 10%;
-	text-transform: capitalize;
+	background-color: #ff9900;
 }
 
 .card-subtitle .bug {
-	background: 5px center no-repeat #7bcf00;
-	color: #fff;
-	padding: 10px;
-	border-radius: 10%;
-	text-transform: capitalize;
+	background-color: #7bcf00;
 }
 
 .card-subtitle .dark {
-	background: 5px center no-repeat #403d48;
-	color: #fff;
-	padding: 10px;
-	border-radius: 10%;
-	text-transform: capitalize;
+	background-color: #403d48;
 }
 
 .card-subtitle .dragon {
-	background: 5px center no-repeat #0076ff;
-	color: #fff;
-	padding: 10px;
-	border-radius: 10%;
-	text-transform: capitalize;
+	background-color: #0076ff;
 }
 
 .card-subtitle .electric {
-	background: 5px center no-repeat #ffde00;
-	color: #fff;
-	padding: 10px;
-	border-radius: 10%;
-	text-transform: capitalize;
+	background-color: #ffde00;
 }
 
 .card-subtitle .fairy {
-	background: 5px center no-repeat #ff76ff;
-	color: #fff;
-	padding: 10px;
-	border-radius: 10%;
-	text-transform: capitalize;
+	background-color: #ff76ff;
 }
 
 .card-subtitle .fighting {
-	background: #ff215b;
-	color: #fff;
-	padding: 10px;
-	border-radius: 10%;
-	text-transform: capitalize;
-}
-
-.card-subtitle .normal {
-	background: 5px center no-repeat rgb(221, 175, 221);
-	padding: 10px;
-	border-radius: 10%;
-	text-transform: capitalize;
-}
-
-.card-subtitle .flying {
-	background: 5px center no-repeat #89bdff;
-	color: #fff;
-	padding: 10px;
-	border-radius: 10%;
-	text-transform: capitalize;
-}
-
-.card-subtitle .steel {
-	background: 5px center no-repeat #808080;
-	color: #fff;
-	padding: 10px;
-	border-radius: 10%;
-	text-transform: capitalize;
-}
-
-.card-subtitle .ground {
-	background: 5px center no-repeat #ff6b0d;
-	color: #fff;
-	padding: 10px;
-	border-radius: 10%;
-	text-transform: capitalize;
-}
-
-.card-subtitle .ghost {
-	background: 5px center no-repeat #6000a9;
-	color: #fff;
-	padding: 10px;
-	border-radius: 10%;
-	text-transform: capitalize;
-}
-
-.card-subtitle .ice {
-	background: 5px center no-repeat #2ee4c6;
-	color: #fff;
-	padding: 10px;
-	border-radius: 10%;
-	text-transform: capitalize;
-}
-
-.card-subtitle .psychic {
-	background: 5px center no-repeat #ff6c64;
-	color: #fff;
-	padding: 10px;
-	border-radius: 10%;
-	text-transform: capitalize;
-}
-
-.card-subtitle .rock {
-	background: 5px center no-repeat #d8bc5a;
-	color: #fff;
-	padding: 10px;
-	border-radius: 10%;
-	text-transform: capitalize;
-}
-
-.card-subtitle .water {
-	background: 5px center no-repeat #14a8ff;
-	color: #fff;
-	padding: 10px;
-	border-radius: 10%;
-	text-transform: capitalize;
-}
-
-
-
-.btn[data-type="water"] {
-	background: #2ee4c6;
-}
-
-.btn[data-type="fire"] {
-	background: #e2a64b;
-}
-
-.btn[data-type="grass"] {
-	background: rgb(91, 241, 91);
-}
-
-.btn[data-type="ice"] {
-	background: #2ee4c6;
-}
-
-.btn[data-type="dark"] {
-	background: #403d48;
-}
-
-.btn[data-type="flying"] {
-	background: #89bdff;
-}
-
-.btn[data-type="rock"] {
-	background: #d8bc5a;
-}
-
-.btn[data-type="ground"] {
-	background: #ff6b0d;
-}
-
-.btn[data-type="normal"] {
-	background: rgb(221, 175, 221);
-}
-
-.btn[data-type="psychic"] {
-	background: #ff6c64;
-}
-
-.btn[data-type="ghost"] {
-	background: #6000a9;
-}
-
-.btn[data-type="fighting"] {
-	background: #f77a9b;
+	background-color: #ff215b;
 }
 
 .btn[data-type="steel"] {
 	background: #808080;
 }
+
+
+
 
 .btn[data-type="fairy"] {
 	background: #ff76ff;
@@ -552,6 +403,7 @@ h1 {
 	grid-template-columns: 1fr 1fr;
 	justify-content: center;
 	width: 60%;
+
 }
 
 .fechando-modal {
@@ -593,6 +445,29 @@ h1 {
 
 .modal-overlay .ativa {
 	display: block;
+}
+
+.btn-ability {
+	border: none;
+	margin-left: 0;
+	background: transparent;
+	color: #fff;
+	font-weight: bold;
+	font-family: "Lato", sans-serif;
+	list-style: none;
+	text-transform: uppercase;
+	cursor: pointer;
+	width: 100%;
+	text-align: start;
+
+}
+
+.h2-abilities {
+	display: flex;
+	width: 95%;
+	font-weight: bold;
+	text-transform: capitalize;
+	font-family: "Lato", sans-serif;
 }
 
 @keyframes bounce {
@@ -896,7 +771,7 @@ h1 {
 	background: #ffff30;
 }
 
-.container-back {}
+
 
 .container-search {
 	margin-bottom: 5%;
@@ -988,7 +863,7 @@ h1 {
 	text-transform: capitalize;
 	width: 100px;
 	justify-content: space-between;
-	margin-bottom: 15%;
+	margin-bottom: 5%;
 	position: relative;
 }
 
@@ -1073,9 +948,145 @@ h1 {
 	align-items: center;
 }
 
+
+
+
+
+
+.card {
+	list-style: none;
+	color: #fff;
+	text-align: center;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+	position: relative;
+	margin-bottom: 20%;
+	border-end-end-radius: 10px;
+	border-end-start-radius: 10px;
+	font-family: "Lato", sans-serif;
+
+
+
+}
+
+.btn {
+	border: none;
+	outline: none;
+	width: 100%;
+	padding: 20px;
+	color: #fff;
+	text-transform: initial;
+	font-size: 1.2rem;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	font-family: "Lato", sans-serif;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.modal-screen,
+.imagem .modal-window {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: rgba(6, 11, 40, 0.15);
+	border-radius: 8px;
+	box-shadow: 0px 0px 10px rgba(113, 112, 112, 0.5);
+	padding: 16px;
+	z-index: 2;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	justify-content: center;
+	height: min-content;
+
+
+
+}
+
+.modal-informationLoading,
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.755);
+	z-index: 2;
+	display: none;
+	backdrop-filter: blur(0.5rem);
+
+
+}
+
+.abilities-container {
+	display: flex;
+	flex-direction: column;
+	margin-top: 5%;
+	font-family: "Lato", sans-serif;
+
+}
+
+.pokedex {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	padding-inline-start: 0;
+	margin-left: 5%;
+	margin-right: 5%;
+	grid-gap: 20px;
+
+}
+
+@media (min-width:1920px) {
+	.card {
+		height: 30rem;
+		width: 95%;
+	}
+
+	.btn {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+	}
+
+	.card-title {
+		margin-top: 5rem;
+	}
+
+	.card::after {
+		width: 16rem;
+		height: 16rem;
+		left: 26%;
+		margin-top: 1rem;
+	}
+
+	.card-image {
+		margin-top: 2rem;
+	}
+
+	.container-types {
+		gap: 5px 15px;
+	}
+
+	.imagem-pokemon {
+		margin-left: 15%;
+	}
+}
+
+@media (max-width:1366px) {
+	.imagem-pokemon {
+		margin-left: 15%;
+		width: 100%;
+	}
+
+	.modal-screen {
+		width: 60%;
+	}
+}
+
 @media (max-width: 1080px) {
 
-	/* Estilos para telas com largura máxima de 768px */
+
 	.card {
 		width: 50vw;
 		margin-bottom: 50px;
@@ -1092,23 +1103,28 @@ h1 {
 		left: 28%;
 	}
 
+	.container-types {
+		grid-template-columns: 1fr 1fr 1fr;
+		margin-left: 5%;
+		margin-right: 5%;
+	}
 
 }
 
 @media (max-width: 768px) {
 
 
-	/* Estilos para telas com largura máxima de 768px */
 
 
 	.pokedex {
-		grid-template-columns: 1fr;
+		display: flex;
+		flex-direction: column;
 		justify-content: center;
+
 	}
 
 
 
-	.card {}
 
 	.search-side {
 		margin: 5%;
@@ -1147,7 +1163,6 @@ h1 {
 		display: grid;
 		grid-template-columns: 1fr;
 		height: 350px;
-		width: 70%;
 	}
 
 	.right-windowPokemon {
@@ -1174,11 +1189,17 @@ h1 {
 		margin-left: 0;
 	}
 
-	.imagem-pokemon {
+	.imagem-pokemon,
+	.constImg-windowPokemon {
 		margin-left: 0;
 		justify-content: center;
+		width: 100%;
 	}
 }
+
+
+
+
 
 @media (max-width: 480px) {
 
@@ -1203,6 +1224,7 @@ h1 {
 	.imagem-pokemon {
 		justify-content: center;
 		margin-left: 0;
+		width: 100%;
 	}
 
 	.search-side {
@@ -1224,6 +1246,7 @@ h1 {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+
 	}
 
 	.card {
@@ -1272,117 +1295,5 @@ h1 {
 	.constImg-windowPokemon {
 		margin-left: 0;
 		justify-content: center;
-	}
-}
-
-.pokedex {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	padding-inline-start: 0;
-	margin-left: 5%;
-	margin-right: 5%;
-	grid-gap: 20px;
-
-}
-
-
-.card {
-	list-style: none;
-	color: #fff;
-	text-align: center;
-	border-top-right-radius: 10px;
-	border-top-left-radius: 10px;
-	position: relative;
-	margin-bottom: 20%;
-	border-end-end-radius: 10px;
-	border-end-start-radius: 10px;
-	font-family: "Lato", sans-serif;
-
-
-
-}
-
-.btn {
-	border: none;
-	outline: none;
-	width: 100%;
-	padding: 20px;
-	color: #fff;
-	text-transform: initial;
-	font-size: 1.2rem;
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;
-	font-family: "Lato", sans-serif;
-	cursor: pointer;
-	font-weight: bold;
-}
-
-.modal-screen,
-.imagem .modal-window {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background-color: rgba(12, 21, 72, 0.179);
-	border-radius: 8px;
-	box-shadow: 0px 0px 10px rgba(113, 112, 112, 0.719);
-	padding: 16px;
-	z-index: 2;
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	justify-content: center;
-	height: min-content;
-	backdrop-filter: blur(1rem);
-
-
-}
-
-.modal-informationLoading,
-.modal-overlay {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.755);
-	z-index: 2;
-	display: none;
-
-
-}
-
-@media (min-width:1920px) {
-	.card {
-		height: 30rem;
-		width: 95%;
-	}
-
-	.btn {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-	}
-
-	.card-title {
-		margin-top: 5rem;
-	}
-
-	.card::after {
-		width: 16rem;
-		height: 16rem;
-		left: 26%;
-		margin-top: 1rem;
-	}
-
-	.card-image {
-		margin-top: 2rem;
-	}
-
-	.container-types {
-		gap: 5px 15px;
-	}
-
-	.imagem-pokemon {
-		margin-left: 15%;
 	}
 }

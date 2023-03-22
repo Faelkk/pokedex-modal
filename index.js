@@ -1,76 +1,33 @@
-const modalWindow = document.querySelector(".modal-window");
-const imagemPoke = document.querySelector(".imagem-poke");
-const pokemonSobre = document.querySelector(".pokemon-sobre");
-const nomePokemon = document.querySelector(".modal-title");
-const modalOverlay = document.querySelector(".modal-overlay");
-const fecharButton = document.querySelector(".modal-close-button");
-const containerSvg = document.querySelector(".container-svg");
-const peso = document.querySelector(".peso");
-const altura = document.querySelector(".altura");
 const hpDiv = document.querySelector(".hp");
 const attackDiv = document.querySelector(".attack");
 const dfDiv = document.querySelector(".defense");
 const spAtkDiv = document.querySelector(".spc-atk");
 const SpdefDiv = document.querySelector(".sp-def");
 const speedDiv = document.querySelector(".speed");
-const spanHp = document.createElement("span");
-const spanAtk = document.createElement("span");
-const spanDef = document.createElement("span");
-const spanSpatk = document.createElement("span");
-const spanSpDef = document.createElement("span");
-const spanSpeed = document.createElement("span");
-const mensagem1 = document.querySelector(".mensagem-poke1");
-const mensagem2 = document.querySelector(".mensagem-poke2");
-const mensagem3 = document.querySelector(".mensagem-poke3");
-const mensagem4 = document.querySelector(".mensagem-poke4");
-const mensagem5 = document.querySelector(".mensagem-poke5");
-const mensagem6 = document.querySelector(".mensagem-poke6");
-const containerPoke = document.querySelector(".container-poke");
-const statusContainer = document.querySelector(".status-container");
-const abilityName = document.querySelector(".habilidades-name");
 const form = document.querySelector(".container-input");
 const formValor = form.elements["input"];
-const h2Container = document.querySelector(".h2-container");
-const typeContainer = document.querySelector(".container-types");
-const containerBack = document.querySelector(".container-back");
-const imgCatch = document.querySelector(".img-catch");
-const containerErro = document.querySelector(".catch-erro");
-const quadradoErro = document.querySelector(".catch-quadrado");
-const searchSide = document.querySelector(".search-side");
-const catchSpan = document.querySelector(".catch-span");
-const left = document.querySelector(".left");
-const perPage = 20;
-const btnContainer = document.querySelector(".btn-cont");
-const typesTotal = document.querySelector(".types-search");
 
 import { consts } from "./contantes.js";
 import { constsAfterSearchPoke } from "./contantes.js";
-import { constDoCards } from "./contantes.js";
-
-let fetchdata = [];
-let result;
-let currentPage = 1;
-let PokeThatIWillSearch;
-let timeoutId;
 
 async function SearchName() {
   const url = `https://pokeapi.co/api/v2/pokemon?limit=1000`;
-  const renpose = await fetch(url).then((response) => response.json());
-  result = renpose.results.map((pokemon) => pokemon.name);
+  const response = await fetch(url).then((response) => response.json());
+  consts.result = response.results.map((pokemon) => pokemon.name);
 }
 
 async function fetchPokemon() {
-  const offset = (currentPage - 1) * perPage;
-  const url = `https://pokeapi.co/api/v2/pokemon?limit=${perPage}&offset=${offset}`;
+  const offset = (consts.currentPage - 1) * consts.perPage;
+  const url = `https://pokeapi.co/api/v2/pokemon?limit=${consts.perPage}&offset=${offset}`;
 
   const response = await fetch(url).then((response) => response.json());
 
   const promisses = response.results.map(
     async (urls) => await fetch(urls.url).then((res) => res.json())
   );
-  const result = await Promise.all(promisses);
-  fetchdata = [...fetchdata, ...result];
-  result.forEach((pokemon) => {
+  const resultado = await Promise.all(promisses);
+  consts.fetchdata = [...consts.fetchdata, ...resultado];
+  resultado.forEach((pokemon) => {
     const li = doCards(pokemon);
     consts.pokedex.appendChild(li);
   });
@@ -84,34 +41,24 @@ function pokemonType(pokemonType) {
 form.addEventListener("submit", PegarValue);
 function PegarValue(event) {
   event.preventDefault();
-  clearTimeout(timeoutId);
+  clearTimeout(consts.timeoutId);
   if (formValor.value.length >= 1) {
-    PokeThatIWillSearch = formValor.value.toLowerCase();
+    consts.PokeThatIWillSearch = formValor.value.toLowerCase();
 
     async function fetchAfterSearch() {
       try {
-        const url = `https://pokeapi.co/api/v2/pokemon/${PokeThatIWillSearch}`;
-        const urlObj = new URL(url);
-        const caminho = urlObj.pathname;
-        console.log(caminho);
+        const url = `https://pokeapi.co/api/v2/pokemon/${consts.PokeThatIWillSearch}`;
         const response = await fetch(url).then((response) => response.json());
-
-        const containerTotal1 = document.querySelector(".container-total");
-        const typeSearch = document.querySelector(".types-search");
-        const btnCont = document.querySelector(".btn-cont");
-        left.style.display = "blockw";
-        searchSide.classList.add("active");
-        searchSide.style.width = "80%";
-        searchSide.style.height = "";
-        containerErro.style.height = 0;
-        catchSpan.style.width = 0;
-        catchSpan.textContent = "";
-        quadradoErro.classList.remove("active");
+        consts.left.style.display = "blockw";
+        consts.searchSide.classList.add("active");
+        consts.searchSide.style.width = "80%";
+        consts.searchSide.style.height = "";
+        consts.containerErro.style.height = 0;
+        consts.catchSpan.style.width = 0;
+        consts.catchSpan.textContent = "";
+        consts.quadradoErro.classList.remove("active");
         consts.containerSearch.style.height = "100%";
 
-        const abilities = response.abilities.map(
-          (ability) => ability.ability.name
-        );
         const totalNames = document.querySelector(".container-total");
         const h1Name = document.querySelector(".namePoke");
         const name = response.name;
@@ -122,13 +69,13 @@ function PegarValue(event) {
         const weight = response.weight;
         const height = response.height;
 
-        typesTotal.innerHTML = "";
+        consts.typesTotal.innerHTML = "";
         const types = response.types.map((type) => type.type.name);
         types.map((item) => {
           const p = document.createElement("p");
           p.innerHTML = item;
           p.className = `paragrafo-search ${p.textContent} `;
-          typesTotal.append(p);
+          consts.typesTotal.append(p);
         });
         totalNames.innerHTML = `${h1Number.outerHTML}  ${h1Name.outerHTML} `;
         const img = response.sprites.other.home.front_default;
@@ -137,12 +84,12 @@ function PegarValue(event) {
         const btnOpenModal = document.createElement("button");
         btnOpenModal.textContent = "Mais Detalhes";
         btnOpenModal.className = `btn-openModal ${firstType}`;
-        btnContainer.innerHTML = btnOpenModal.outerHTML;
+        consts.btnContainer.innerHTML = btnOpenModal.outerHTML;
 
         const btnOpenEventListener = document.querySelector(".btn-openModal");
         btnOpenEventListener.addEventListener("click", openModalInformation);
         function openModalInformation() {
-          modalInformation.style.display = "block";
+          consts.modalInformation.style.display = "block";
           consts.windowImgPoke.src = img;
           const h2Windowabout = document.createElement("h2");
           h2Windowabout.classList.add("h2Window");
@@ -191,6 +138,17 @@ function PegarValue(event) {
             pWindowAbout.className = `pLoadingMore ${type.name}`;
             consts.windowScreenTypes.appendChild(pWindowAbout);
           });
+          const h2Ability = document.createElement("h2");
+          h2Ability.textContent = "Habilidades:";
+          h2Ability.classList.add("h2-abilities");
+
+          consts.abilityModalOverlay.innerHTML = h2Ability.outerHTML;
+          response.abilities.forEach(({ ability }) => {
+            const btnAbility = document.createElement("button");
+            btnAbility.classList.add("btn-ability");
+            btnAbility.textContent = ability.name;
+            consts.abilityModalOverlay.appendChild(btnAbility);
+          });
 
           consts.windowInformationPokemon.innerHTML =
             h2Windowabout.outerHTML +
@@ -200,27 +158,27 @@ function PegarValue(event) {
           formValor.value = "";
         }
       } catch (error) {
-        left.style.display = "none";
+        consts.left.style.display = "none";
 
         consts.containerSearch.style.height = 0;
-        searchSide.classList.remove("active");
-        searchSide.style.width = 0;
-        containerErro.style.height = "100%";
-        imgCatch.style.height = "100%";
-        catchSpan.style.height = "9%";
-        containerErro.style.opacity = 1;
-        catchSpan.textContent = "Pokemon não encontrado";
+        consts.searchSide.classList.remove("active");
+        consts.searchSide.style.width = 0;
+        consts.containerErro.style.height = "100%";
+        consts.imgCatch.style.height = "100%";
+        consts.catchSpan.style.height = "9%";
+        consts.containerErro.style.opacity = 1;
+        consts.catchSpan.textContent = "Pokemon não encontrado";
 
-        quadradoErro.classList.add("active");
+        consts.quadradoErro.classList.add("active");
 
         console.log(error);
-        timeoutId = setTimeout(() => {
-          containerErro.style.height = 0;
-          imgCatch.style.height = 0;
-          catchSpan.style.height = 0;
-          catchSpan.textContent = "";
+        consts.timeoutId = setTimeout(() => {
+          consts.containerErro.style.height = 0;
+          consts.imgCatch.style.height = 0;
+          consts.catchSpan.style.height = 0;
+          consts.catchSpan.textContent = "";
 
-          quadradoErro.classList.remove("active");
+          consts.quadradoErro.classList.remove("active");
         }, 3000);
       }
     }
@@ -229,52 +187,28 @@ function PegarValue(event) {
   }
 }
 
-const modalInformation = document.querySelector(".modal-informationLoading");
-
-const closeInformationModal = document.querySelector(".btn-screen");
-closeInformationModal.addEventListener("click", btnCloseModal);
+consts.closeInformationModal.addEventListener("click", btnCloseModal);
 function btnCloseModal() {
-  modalInformation.style.display = "none";
+  consts.modalInformation.style.display = "none";
 }
-const btnTypes = [
-  "normal",
-  "fighting",
-  "flying",
-  "poison",
-  "ground",
-  "rock",
-  "bug",
-  "ghost",
-  "steel",
-  "fire",
-  "water",
-  "grass",
-  "electric",
-  "psychic",
-  "ice",
-  "dragon",
-  "dark",
-  "fairy",
-];
 
-for (let i = 0; i < btnTypes.length; i++) {
+for (let i = 0; i < consts.btnTypes.length; i++) {
   const btnType = document.createElement("button");
-  btnType.className = `btn-types ${btnTypes[i]}`;
-  btnType.textContent = btnTypes[i];
+  btnType.className = `btn-types ${consts.btnTypes[i]}`;
+  btnType.textContent = consts.btnTypes[i];
   btnType.addEventListener("click", (e) => {
-    const dataFiltrado = fetchdata.filter((pokemon) => {
+    const dataFiltrado = consts.fetchdata.filter((pokemon) => {
       const filtrandoOsPokemon = pokemonFiltrar(pokemon.types).find((type) => {
-        return type === btnTypes[i].toLowerCase();
+        return type === consts.btnTypes[i].toLowerCase();
       });
 
       return filtrandoOsPokemon;
     });
-    const pokedex = document.querySelector('[data-js="Pokedex"]');
 
-    pokedex.innerHTML = "";
+    consts.pokedex.innerHTML = "";
 
     dataFiltrado.forEach((pokemonData) => {
-      pokedex.append(doCards(pokemonData));
+      consts.pokedex.append(doCards(pokemonData));
     });
   });
 
@@ -284,7 +218,6 @@ const btnTop = document.querySelector(".btn-top");
 btnTop.addEventListener("click", backStart);
 function backStart(event) {
   event.preventDefault();
-  console.log("oi");
   consts.h2Container.scrollIntoView({ behavior: "smooth" }, true);
 }
 
@@ -295,7 +228,7 @@ function doCards(pokemon) {
   li.id = `${pokemon.name}`;
   li.setAttribute("data-type", pokemon.id);
   const avatarPokemon = document.createElement("img");
-  avatarPokemon.src = imagemPoke.src =
+  avatarPokemon.src = consts.imagemPoke.src =
     pokemon.sprites.other.dream_world.front_default;
   avatarPokemon.className = "card-image";
 
@@ -324,7 +257,7 @@ function doCards(pokemon) {
   return li;
 }
 
-fecharButton.addEventListener("click", fecharModal);
+consts.fecharButton.addEventListener("click", fecharModal);
 
 function abrirModal(pokemon) {
   const typesDiv = document.createElement("div");
@@ -342,23 +275,23 @@ function abrirModal(pokemon) {
     const mouseX = event.clientX;
     const mouseY = event.clientY;
     if (
-      mouseX < modalWindow.offsetLeft ||
-      mouseX > modalWindow.offsetLeft + modalWindow.offsetWidth ||
-      mouseY < modalWindow.offsetTop ||
-      mouseY > modalWindow.offsetTop + modalWindow.offsetHeight
+      mouseX < consts.modalWindow.offsetLeft ||
+      mouseX > consts.modalWindow.offsetLeft + consts.modalWindow.offsetWidth ||
+      mouseY < consts.modalWindowoffsetTop ||
+      mouseY > consts.modalWindowoffsetTop + consts.modalWindow.offsetHeight
     ) {
       fecharModal();
     }
   }
 
-  hpDiv.innerHTML = mensagem1.outerHTML + hp;
-  attackDiv.innerHTML = mensagem2.outerHTML + atk;
-  dfDiv.innerHTML = mensagem3.outerHTML + def;
-  spAtkDiv.innerHTML = mensagem4.outerHTML + spAtk;
-  SpdefDiv.innerHTML = mensagem5.outerHTML + spDef;
-  speedDiv.innerHTML = mensagem6.outerHTML + speed;
-  peso.textContent = `Peso: ${pokemon.weight / 10} kilos`;
-  altura.textContent = `Altura: ${pokemon.height / 10} m`;
+  hpDiv.innerHTML = consts.mensagem1.outerHTML + hp;
+  attackDiv.innerHTML = consts.mensagem2.outerHTML + atk;
+  dfDiv.innerHTML = consts.mensagem3.outerHTML + def;
+  spAtkDiv.innerHTML = consts.mensagem4.outerHTML + spAtk;
+  SpdefDiv.innerHTML = consts.mensagem5.outerHTML + spDef;
+  speedDiv.innerHTML = consts.mensagem6.outerHTML + speed;
+  consts.peso.textContent = `Peso: ${pokemon.weight / 10} kilos`;
+  consts.altura.textContent = `Altura: ${pokemon.height / 10} m`;
   newTitulo.classList.add("modal-title");
   newTitulo.textContent = `${id}. ${name}`;
 
@@ -369,10 +302,23 @@ function abrirModal(pokemon) {
     typesDiv.append(tipagemNome);
   });
 
-  pokemonSobre.innerHTML =
-    newTitulo.outerHTML + containerSvg.outerHTML + typesDiv.outerHTML;
-  imagemPoke.src = pokemon.sprites.other.dream_world.front_default;
-  modalOverlay.style.display = "block";
+  const h2Ability = document.createElement("h2");
+  h2Ability.textContent = "Habilidades:";
+  h2Ability.classList.add("h2-abilities");
+  consts.abilitiescontainer.innerHTML = h2Ability.outerHTML;
+  pokemon.abilities.forEach(({ ability }) => {
+    const btnAbility = document.createElement("button");
+    btnAbility.classList.add("btn-ability");
+    btnAbility.textContent = ability.name;
+    consts.abilitiescontainer.appendChild(btnAbility);
+  });
+  consts.containerPoke.innerHTML =
+    consts.statusContainer.outerHTML + consts.abilitiescontainer.outerHTML;
+
+  consts.pokemonSobre.innerHTML =
+    newTitulo.outerHTML + consts.containerSvg.outerHTML + typesDiv.outerHTML;
+  consts.imagemPoke.src = pokemon.sprites.other.dream_world.front_default;
+  consts.modalOverlay.style.display = "block";
 }
 
 function fecharModal() {
@@ -388,18 +334,17 @@ const btnType = document.querySelectorAll(".container-types button");
 btnType.forEach((button) => {
   button.addEventListener("click", filtrarBtnListener);
   function filtrarBtnListener() {
-    const dataFiltrado = fetchdata.filter((pokemon) => {
+    const dataFiltrado = consts.fetchdata.filter((pokemon) => {
       const filtrandoOsPokemon = pokemonFiltrar(pokemon.types).find((type) => {
         return type === button.textContent.toLowerCase();
       });
       return filtrandoOsPokemon;
     });
-    const pokedex = document.querySelector('[data-js="Pokedex"]');
 
-    pokedex.innerHTML = "";
+    consts.pokedex.innerHTML = "";
 
     dataFiltrado.forEach((pokemonData) => {
-      pokedex.append(doCards(pokemonData));
+      consts.pokedex.append(doCards(pokemonData));
     });
   }
 });
@@ -410,11 +355,11 @@ backToNormal.textContent = "Carregar mais";
 consts.containerBack.innerHTML = backToNormal.outerHTML;
 const buttonCarregar = document.querySelector(".btn-carregar");
 buttonCarregar.addEventListener("click", (button) => {
-  currentPage++;
+  consts.currentPage++;
   button.preventDefault();
-  const start = currentPage - 1 * perPage;
-  const end = start + perPage;
-  const pageData = fetchdata.slice(start, end);
+  const start = consts.currentPage - 1 * consts.perPage;
+  const end = start + consts.perPage;
+  const pageData = consts.fetchdata.slice(start, end);
   pageData.forEach((pokemon) => {
     const li = doCards(pokemon);
     consts.pokedex.appendChild(li);
