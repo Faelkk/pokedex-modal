@@ -133,7 +133,9 @@ h1 {
 
 }
 
-.steel {
+
+.steel,
+.btn[data-type="steel"] {
 	background-color: #808080;
 }
 
@@ -145,16 +147,19 @@ h1 {
 	background-color: #f3b250;
 }
 
-.grass {
+.grass,
+.btn[data-type="grass"] {
 	background: #55e964de;
 
 }
 
-.electric {
+.electric,
+.btn[data-type="electric"] {
 	background-color: rgb(212, 198, 88);
 }
 
-.water {
+.water,
+.btn[data-type="water"] {
 	background-color: #3064b1;
 }
 
@@ -191,15 +196,18 @@ h1 {
 	background-color: #efb7f9;
 }
 
-.poison {
+.poison,
+.btn[data-type="poison"] {
 	background-color: #ed69f9;
 }
 
-.bug {
+.bug,
+.btn[data-type="bug"] {
 	background-color: #7dae34;
 }
 
-.dragon {
+.dragon,
+.btn[data-type="dragon"] {
 	background-color: #97b3e6;
 }
 
@@ -327,44 +335,7 @@ h1 {
 	background-color: #ff215b;
 }
 
-.btn[data-type="water"] {
-	background: #2a67ae;
-}
 
-.btn[data-type="steel"] {
-	background: #808080;
-}
-
-
-.btn[data-type="normal"] {
-	background: rgb(198, 115, 198);
-}
-
-.btn[data-type="fairy"] {
-	background: #ff76ff;
-}
-
-.btn[data-type="poison"] {
-	background: #ed69f9;
-}
-
-.btn[data-type="electric"] {
-	background: rgb(222, 206, 68);
-}
-
-.btn[data-type="dragon"] {
-	background: #0076ff;
-}
-
-.btn[data-type="bug"] {
-	background: #7dae34;
-	;
-	;
-}
-
-.btn[data-type="grass"] {
-	background: #55e964de;
-}
 
 
 .status-container {
