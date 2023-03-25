@@ -56,7 +56,7 @@ function PegarValue(event) {
         consts.searchSide.classList.add("active");
         consts.searchSide.style.width = "80%";
         consts.searchSide.style.height = "";
-        consts.containerErro.style.height = 0;
+        consts.containerErro.style.width = 0;
         consts.catchSpan.style.width = 0;
         consts.catchSpan.textContent = "";
         consts.quadradoErro.classList.remove("active");
@@ -166,23 +166,23 @@ function PegarValue(event) {
         consts.containerSearch.style.height = 0;
         consts.searchSide.classList.remove("active");
         consts.searchSide.style.width = 0;
-        consts.containerErro.style.height = "100%";
         consts.imgCatch.style.height = "100%";
         consts.catchSpan.style.height = "9%";
         consts.containerErro.style.opacity = 1;
+        consts.containerErro.style.width = "100%";
         consts.catchSpan.textContent = "Pokemon não encontrado";
 
         consts.quadradoErro.classList.add("active");
 
         console.log(error);
         consts.timeoutId = setTimeout(() => {
-          consts.containerErro.style.height = 0;
           consts.imgCatch.style.height = 0;
           consts.catchSpan.style.height = 0;
           consts.catchSpan.textContent = "";
+          consts.containerErro.style.width = 0;
 
           consts.quadradoErro.classList.remove("active");
-        }, 3000);
+        }, 8000);
       }
     }
     formValor.value = "";
