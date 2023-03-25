@@ -17,7 +17,7 @@ ul {
 .footer {
 	display: flex;
 	justify-content: space-between;
-	margin: 5% 0;
+	margin: 5%;
 	font: 700 1.2rem/1.5 "Lato", sans-serif;
 	text-transform: capitalize;
 	border-top: 1px solid #fff;
@@ -121,19 +121,23 @@ h1 {
 .card::after {
 	content: "";
 	display: block;
-	width: 50%;
+	width: 45%;
 	height: 55%;
 	border-radius: 50%;
 	background-color: #fff;
 	opacity: 0.7;
 	position: absolute;
 	top: 0%;
-	left: 25%;
+	left: 30%;
+
 }
 
-.steel,
-.normal {
+.steel {
 	background-color: #808080;
+}
+
+.normal {
+	background: rgb(201, 146, 201);
 }
 
 .fire {
@@ -141,17 +145,38 @@ h1 {
 }
 
 .grass {
-	background: #8bed64;
+	background: #55e964de;
+
 }
 
 .electric {
-	background-color: rgb(241, 241, 108);
+	background-color: rgb(212, 198, 88);
 }
 
-.water,
-.ice {
-	background-color: #b2ebe1;
+.water {
+	background-color: #3064b1;
 }
+
+.ice {
+	background-color: #2593d3;
+}
+
+
+.card-subtitle .water {
+	background: 5px center no-repeat #086aa3;
+	padding: 10px;
+
+}
+
+.card-subtitle .rock {
+	background-color: #f1a469;
+	padding: 10px;
+	color: #fff;
+	font-family: "Lato", sans-serif;
+	font-weight: bold;
+}
+
+
 
 .ground {
 	background-color: #f9873f;
@@ -170,7 +195,7 @@ h1 {
 }
 
 .bug {
-	background-color: #48c815;
+	background-color: #7dae34;
 }
 
 .dragon {
@@ -206,6 +231,14 @@ h1 {
 	z-index: 2;
 	font-family: "Lato", sans-serif;
 	font-weight: bold;
+	margin-top: 5rem;
+}
+
+.card-image-container {
+	display: flex;
+	justify-content: center;
+	margin-left: 5%;
+	margin-top: 5%;
 }
 
 .card-subtitle {
@@ -218,11 +251,12 @@ h1 {
 	justify-content: center;
 	gap: 5px;
 	font-weight: bold;
+	font-family: "Lato", sans-serif;
 }
 
 .card-image {
-	width: 160px;
-	height: 180px;
+	width: 130px;
+	height: 130px;
 	position: relative;
 	z-index: 2;
 }
@@ -242,16 +276,19 @@ h1 {
 .card-subtitle .ground,
 .card-subtitle .ghost,
 .card-subtitle .ice,
-.card-subtitle .psychic {
+.card-subtitle .psychic,
+.card-subtitle .water {
 	background-repeat: no-repeat;
 	color: #fff;
 	padding: 10px;
 	border-radius: 10%;
 	text-transform: capitalize;
+	font-family: "Lato", sans-serif;
+	font-weight: bold;
 }
 
 .card-subtitle .grass {
-	background-color: #5edc0e;
+	background-color: #6ba845;
 }
 
 .card-subtitle .poison {
@@ -263,7 +300,7 @@ h1 {
 }
 
 .card-subtitle .bug {
-	background-color: #7bcf00;
+	background-color: #7dae34;
 }
 
 .card-subtitle .dark {
@@ -278,6 +315,8 @@ h1 {
 	background-color: #ffde00;
 }
 
+
+
 .card-subtitle .fairy {
 	background-color: #ff76ff;
 }
@@ -286,12 +325,18 @@ h1 {
 	background-color: #ff215b;
 }
 
+.btn[data-type="water"] {
+	background: #2a67ae;
+}
+
 .btn[data-type="steel"] {
 	background: #808080;
 }
 
 
-
+.btn[data-type="normal"] {
+	background: rgb(198, 115, 198);
+}
 
 .btn[data-type="fairy"] {
 	background: #ff76ff;
@@ -302,7 +347,7 @@ h1 {
 }
 
 .btn[data-type="electric"] {
-	background: rgb(233, 233, 158);
+	background: rgb(222, 206, 68);
 }
 
 .btn[data-type="dragon"] {
@@ -310,7 +355,13 @@ h1 {
 }
 
 .btn[data-type="bug"] {
-	background: #7bcf00;
+	background: #7dae34;
+	;
+	;
+}
+
+.btn[data-type="grass"] {
+	background: #55e964de;
 }
 
 
@@ -543,7 +594,7 @@ h1 {
 
 .types-container .water,
 .pLoadingMore .water {
-	background: #14a8ff;
+	background: #227aad;
 	color: #fff;
 	padding: 10px;
 	border-radius: 10%;
@@ -969,6 +1020,7 @@ h1 {
 
 }
 
+
 .btn {
 	border: none;
 	outline: none;
@@ -1037,10 +1089,58 @@ h1 {
 
 }
 
+.container-semFiltrar {
+	width: 100%;
+	background: #d8bc5a;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: "Lato", sans-serif;
+
+
+}
+
+.pokedex {
+	transition: all 0.3s;
+}
+
+
+
+
+.imagem-semFiltro {
+	width: 20%;
+}
+
+.pokedex.mid {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 5%;
+	transform: translateX(0);
+}
+
+.pokedex.active {
+	display: grid;
+	margin-bottom: 5%;
+	transform: translateX(0);
+}
+
 @media (min-width:1920px) {
 	.card {
 		height: 30rem;
 		width: 95%;
+	}
+
+	.card-image-container {
+		margin-top: 0;
+		margin-left: 0;
+	}
+
+	.card-image {
+		width: 160px;
+		height: 180px;
+		position: relative;
+		z-index: 2;
 	}
 
 	.btn {

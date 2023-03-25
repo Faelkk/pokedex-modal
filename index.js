@@ -5,7 +5,9 @@ const spAtkDiv = document.querySelector(".spc-atk");
 const SpdefDiv = document.querySelector(".sp-def");
 const speedDiv = document.querySelector(".speed");
 const form = document.querySelector(".container-input");
+
 const formValor = form.elements["input"];
+let tempoNoFilter;
 
 import { consts } from "./contantes.js";
 import { constsAfterSearchPoke } from "./contantes.js";
@@ -49,7 +51,8 @@ function PegarValue(event) {
       try {
         const url = `https://pokeapi.co/api/v2/pokemon/${consts.PokeThatIWillSearch}`;
         const response = await fetch(url).then((response) => response.json());
-        consts.left.style.display = "blockw";
+
+        consts.left.style.display = "block";
         consts.searchSide.classList.add("active");
         consts.searchSide.style.width = "80%";
         consts.searchSide.style.height = "";
@@ -181,6 +184,7 @@ function PegarValue(event) {
           consts.quadradoErro.classList.remove("active");
         }, 3000);
       }
+      desableSearch = false;
     }
     formValor.value = "";
     fetchAfterSearch();
@@ -222,15 +226,21 @@ function backStart(event) {
 }
 
 function doCards(pokemon) {
+  const divImg = document.createElement("div");
+  divImg.className = "card-image-container";
+
   const tipoNome = pokemonType(pokemon.types);
   const li = document.createElement("li");
+
   li.className = `card ${tipoNome}`;
   li.id = `${pokemon.name}`;
   li.setAttribute("data-type", pokemon.id);
+
   const avatarPokemon = document.createElement("img");
   avatarPokemon.src = consts.imagemPoke.src =
     pokemon.sprites.other.dream_world.front_default;
   avatarPokemon.className = "card-image";
+  divImg.append(avatarPokemon);
 
   const tituloPokemon = document.createElement("h2");
   tituloPokemon.innerText = `${pokemon.id} . ${pokemon.name}`;
@@ -253,7 +263,7 @@ function doCards(pokemon) {
     abrirModal(pokemon);
   });
 
-  li.append(avatarPokemon, tituloPokemon, TipagemDosPokemons, botaoInformacao);
+  li.append(divImg, tituloPokemon, TipagemDosPokemons, botaoInformacao);
   return li;
 }
 
@@ -325,6 +335,11 @@ function fecharModal() {
   consts.modalOverlay.style.display = "none";
 }
 
+const noPokeFiltrado = document.createElement("div");
+const insideNoFilter = document.createElement("div");
+const h1noPokeFilter = document.createElement("h2");
+const imgNoFilter = document.createElement("img");
+
 function pokemonFiltrar(pokemonType) {
   const tiponomes = pokemonType.map((type) => type.type.name);
   return tiponomes;
@@ -333,7 +348,10 @@ function pokemonFiltrar(pokemonType) {
 const btnType = document.querySelectorAll(".container-types button");
 btnType.forEach((button) => {
   button.addEventListener("click", filtrarBtnListener);
+
   function filtrarBtnListener() {
+    clearTimeout(tempoNoFilter);
+    consts.pokedex.classList = "pokedex";
     const dataFiltrado = consts.fetchdata.filter((pokemon) => {
       const filtrandoOsPokemon = pokemonFiltrar(pokemon.types).find((type) => {
         return type === button.textContent.toLowerCase();
@@ -341,11 +359,33 @@ btnType.forEach((button) => {
       return filtrandoOsPokemon;
     });
 
-    consts.pokedex.innerHTML = "";
+    if (dataFiltrado.length < 1) {
+      noPokeFiltrado.style.display = "block";
+      h1noPokeFilter.textContent =
+        "sem pokemons para serem filtrado desse tipo";
+      imgNoFilter.src =
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/54.png";
+      insideNoFilter.classList.add("container-semFiltrar");
+      insideNoFilter.classList.add("active");
+      h1noPokeFilter.classList.add(".mensage-semFiltro");
+      imgNoFilter.classList.add("imagem-semFiltro");
+      insideNoFilter.innerHTML =
+        h1noPokeFilter.outerHTML + imgNoFilter.outerHTML;
+      noPokeFiltrado.innerHTML = insideNoFilter.outerHTML;
+      noPokeFiltrado.classList.add("container-noPoke");
+      consts.pokedex.classList.add("mid");
+      consts.pokedex.innerHTML = noPokeFiltrado.outerHTML;
+      tempoNoFilter = setTimeout(() => {
+        consts.pokedex.innerHTML = "";
+      }, 2000);
+      return insideNoFilter;
+    } else {
+      consts.pokedex.innerHTML = "";
 
-    dataFiltrado.forEach((pokemonData) => {
-      consts.pokedex.append(doCards(pokemonData));
-    });
+      dataFiltrado.forEach((pokemonData) => {
+        consts.pokedex.append(doCards(pokemonData));
+      });
+    }
   }
 });
 
@@ -355,11 +395,19 @@ backToNormal.textContent = "Carregar mais";
 consts.containerBack.innerHTML = backToNormal.outerHTML;
 const buttonCarregar = document.querySelector(".btn-carregar");
 buttonCarregar.addEventListener("click", (button) => {
+  clearTimeout(tempoNoFilter);
+  const noFilterPokemon = document.querySelector(".container-noPoke");
+  if (noFilterPokemon) {
+    noFilterPokemon.style.display = "none";
+  }
+
   consts.currentPage++;
   button.preventDefault();
   const start = consts.currentPage - 1 * consts.perPage;
   const end = start + consts.perPage;
   const pageData = consts.fetchdata.slice(start, end);
+  consts.pokedex.classList.remove("mid");
+
   pageData.forEach((pokemon) => {
     const li = doCards(pokemon);
     consts.pokedex.appendChild(li);
