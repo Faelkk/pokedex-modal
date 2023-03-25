@@ -184,7 +184,6 @@ function PegarValue(event) {
           consts.quadradoErro.classList.remove("active");
         }, 3000);
       }
-      desableSearch = false;
     }
     formValor.value = "";
     fetchAfterSearch();
@@ -281,17 +280,8 @@ function abrirModal(pokemon) {
   );
   consts.modalOverlay.addEventListener("click", verificarClique);
 
-  function verificarClique(event) {
-    const mouseX = event.clientX;
-    const mouseY = event.clientY;
-    if (
-      mouseX < consts.modalWindow.offsetLeft ||
-      mouseX > consts.modalWindow.offsetLeft + consts.modalWindow.offsetWidth ||
-      mouseY < consts.modalWindowoffsetTop ||
-      mouseY > consts.modalWindowoffsetTop + consts.modalWindow.offsetHeight
-    ) {
-      fecharModal();
-    }
+  function verificarClique() {
+    fecharModal();
   }
 
   hpDiv.innerHTML = consts.mensagem1.outerHTML + hp;
@@ -345,6 +335,11 @@ function pokemonFiltrar(pokemonType) {
   return tiponomes;
 }
 
+const informationLoading = document.querySelector(".modal-informationLoading");
+informationLoading.addEventListener("click", loadingModalOverlay);
+function loadingModalOverlay() {
+  informationLoading.style.display = "none";
+}
 const btnType = document.querySelectorAll(".container-types button");
 btnType.forEach((button) => {
   button.addEventListener("click", filtrarBtnListener);
