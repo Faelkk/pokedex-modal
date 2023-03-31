@@ -12,11 +12,54 @@ let tempoNoFilter;
 import { consts } from "./contantes.js";
 import { constsAfterSearchPoke } from "./contantes.js";
 
-async function SearchName() {
-  const url = `https://pokeapi.co/api/v2/pokemon?limit=1000`;
-  const response = await fetch(url).then((response) => response.json());
-  consts.result = response.results.map((pokemon) => pokemon.name);
+for (let i = 0; i < consts.btnTypes.length; i++) {
+  const btnType = document.createElement("button");
+  btnType.className = `btn-types ${consts.btnTypes[i]}`;
+  btnType.textContent = consts.btnTypes[i];
+
+  consts.typeContainer.append(btnType);
 }
+
+let filteredData = [];
+
+const btnType = document.querySelectorAll(".container-types button");
+btnType.forEach((button) => {
+  button.addEventListener("click", filtrarBtnListener);
+
+  async function filtrarBtnListener(e) {
+    const btnClick = e.target.textContent.toLowerCase();
+
+    clearTimeout(tempoNoFilter);
+    consts.pokedex.classList = "pokedex";
+
+    const dataFiltrado = consts.fetchdata.filter((pokemon) => {
+      const filtrandoOsPokemon = pokemonFiltrar(pokemon.types).find((type) => {
+        return type === button.textContent.toLowerCase();
+      });
+
+      return filtrandoOsPokemon;
+    });
+    async function fetchBtnClick() {
+      consts.pokedex.innerHTML = "";
+      const url = `https://pokeapi.co/api/v2/type/${btnClick}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      const pokemonsData = await Promise.all(
+        data.pokemon.map(async (pokemon) => {
+          const pokemonUrl = pokemon.pokemon.url;
+          const pokemonResponse = await fetch(pokemonUrl);
+          const pokemonData = await pokemonResponse.json();
+          return pokemonData;
+        })
+      );
+
+      pokemonsData.forEach((dataPokemon) => {
+        consts.pokedex.append(doCards(dataPokemon));
+      });
+    }
+    fetchBtnClick();
+  }
+});
 
 async function fetchPokemon() {
   const offset = (consts.currentPage - 1) * consts.perPage;
@@ -35,7 +78,7 @@ async function fetchPokemon() {
   });
 }
 function pokemonType(pokemonType) {
-  const tiponomes = pokemonType.map((type) => type.type.name);
+  const tiponomes = pokemonType.map((types) => types.type.name);
   const tipoClass = tiponomes[0];
   return tipoClass;
 }
@@ -120,10 +163,10 @@ function PegarValue(event) {
           const SpeedBaseStat = response.stats.find(
             (stat) => stat.stat.name === "speed"
           ).base_stat;
-
-          constsAfterSearchPoke.spanHp.innerHTML = hpBaseStat;
-          constsAfterSearchPoke.hpDiv.innerHTML = `${constsAfterSearchPoke.mensagemLoading1.outerHTML} ${constsAfterSearchPoke.spanHp.outerHTML}`;
-          constsAfterSearchPoke.spanAtk.innerHTML = attackBaseStat;
+          hg;
+          constsAfterSearchPoke.hgspanHp.innerHTML = hpBaseStat;
+          constsAfterSearchPoke.hghpDiv.innerHTML = `${constsAfterSearchPoke.mensagemLoading1.outerHTML} ${constsAfterSearchPoke.spanHp.outerHTML}`;
+          constsAfterSearchPoke.hgspanAtk.innerHTML = attackBaseStat;
           constsAfterSearchPoke.attackDiv.innerHTML = `${constsAfterSearchPoke.mensagemLoading2.outerHTML} ${constsAfterSearchPoke.spanAtk.outerHTML}`;
           constsAfterSearchPoke.spanDef.innerHTML = defBaseStat;
           constsAfterSearchPoke.dfDiv.innerHTML = `${constsAfterSearchPoke.mensagemLoading3.outerHTML} ${constsAfterSearchPoke.spanDef.outerHTML}`;
@@ -195,28 +238,6 @@ function btnCloseModal() {
   consts.modalInformation.style.display = "none";
 }
 
-for (let i = 0; i < consts.btnTypes.length; i++) {
-  const btnType = document.createElement("button");
-  btnType.className = `btn-types ${consts.btnTypes[i]}`;
-  btnType.textContent = consts.btnTypes[i];
-  btnType.addEventListener("click", (e) => {
-    const dataFiltrado = consts.fetchdata.filter((pokemon) => {
-      const filtrandoOsPokemon = pokemonFiltrar(pokemon.types).find((type) => {
-        return type === consts.btnTypes[i].toLowerCase();
-      });
-
-      return filtrandoOsPokemon;
-    });
-
-    consts.pokedex.innerHTML = "";
-
-    dataFiltrado.forEach((pokemonData) => {
-      consts.pokedex.append(doCards(pokemonData));
-    });
-  });
-
-  consts.typeContainer.append(btnType);
-}
 const btnTop = document.querySelector(".btn-top");
 btnTop.addEventListener("click", backStart);
 function backStart(event) {
@@ -237,7 +258,7 @@ function doCards(pokemon) {
 
   const avatarPokemon = document.createElement("img");
   avatarPokemon.src = consts.imagemPoke.src =
-    pokemon.sprites.other.dream_world.front_default;
+    pokemon.sprites.other.home.front_default;
   avatarPokemon.className = "card-image";
   divImg.append(avatarPokemon);
 
@@ -340,49 +361,6 @@ informationLoading.addEventListener("click", loadingModalOverlay);
 function loadingModalOverlay() {
   informationLoading.style.display = "none";
 }
-const btnType = document.querySelectorAll(".container-types button");
-btnType.forEach((button) => {
-  button.addEventListener("click", filtrarBtnListener);
-
-  function filtrarBtnListener() {
-    clearTimeout(tempoNoFilter);
-    consts.pokedex.classList = "pokedex";
-    const dataFiltrado = consts.fetchdata.filter((pokemon) => {
-      const filtrandoOsPokemon = pokemonFiltrar(pokemon.types).find((type) => {
-        return type === button.textContent.toLowerCase();
-      });
-      return filtrandoOsPokemon;
-    });
-
-    if (dataFiltrado.length < 1) {
-      noPokeFiltrado.style.display = "block";
-      h1noPokeFilter.textContent =
-        "sem pokemons para serem filtrado desse tipo";
-      imgNoFilter.src =
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/54.png";
-      insideNoFilter.classList.add("container-semFiltrar");
-      insideNoFilter.classList.add("active");
-      h1noPokeFilter.classList.add(".mensage-semFiltro");
-      imgNoFilter.classList.add("imagem-semFiltro");
-      insideNoFilter.innerHTML =
-        h1noPokeFilter.outerHTML + imgNoFilter.outerHTML;
-      noPokeFiltrado.innerHTML = insideNoFilter.outerHTML;
-      noPokeFiltrado.classList.add("container-noPoke");
-      consts.pokedex.classList.add("mid");
-      consts.pokedex.innerHTML = noPokeFiltrado.outerHTML;
-      tempoNoFilter = setTimeout(() => {
-        consts.pokedex.innerHTML = "";
-      }, 2000);
-      return insideNoFilter;
-    } else {
-      consts.pokedex.innerHTML = "";
-
-      dataFiltrado.forEach((pokemonData) => {
-        consts.pokedex.append(doCards(pokemonData));
-      });
-    }
-  }
-});
 
 const backToNormal = document.createElement("button");
 backToNormal.classList.add("btn-carregar");
@@ -410,6 +388,4 @@ buttonCarregar.addEventListener("click", (button) => {
 
   fetchPokemon();
 });
-
-SearchName();
 fetchPokemon();
